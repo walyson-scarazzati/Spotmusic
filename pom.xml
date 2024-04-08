@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+<!--  um dos principios do Spring boot é o conceito de convenção sobre configuração -->
+    <groupId>br.com.devmedia</groupId>
+    <artifactId>intro-spring-boot-web</artifactId>
+    <version>1.0-SNAPSHOT</version>
+   <!--  não foi necessario declarar a tag packaging como war algo comum quando cria aplicativos web com Spring Boot isso deixa de ser necessário
+   de forma simples ele torna o projeto autosuficiente também não é necessario preocupar com servidor web-->
+
+<!--     a tag parent com ela informa que ira herdar as configurações, dependencias, propriedades declaradas no pom.xml do projeto spring-boot-starter-parent 
+    traz para o projeto as dependencias necessarias para começar programar com Spring Boot  -->
+    
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.10.RELEASE</version>
+    </parent>
+
+<!--   isso foi feito por que por default spring-boot-starter-parent define a versão do Java 1.6 como default -->
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+
+	<!-- Por que somente no bootstrap declarou a versão da dependencia? 
+	 R: Ao declarar a versão no parent automaticamente o Spring Boot assumira essa versão para as demais dependencias  -->
+	 
+<!-- 	 Por que em algumas delas esta presente o starter? Dependencias iniciadas com spring-boot-starter representa dependencias que agrupa outras
+	 representa facilitadores criados pelo Spring para fornecer para aplicação tudo que equipe do Spring avalia como necessario para aquilo. -->
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+       <!--  dados armazenados sem bancos -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.30</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+         <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+    </dependencies>
+<!-- 	plugin fornecido pelo Spring Boot para comunicar-se com Maven 
+a partir é possivel executar aplicação como ela fosse um simples jar não precisa se preocupar com Tomcat e Jetty 
+o container web será empacotado junto com o projeto -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

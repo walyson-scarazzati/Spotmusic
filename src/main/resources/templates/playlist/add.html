@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!-- Bootstrap: é uma biblioteca de componentes que nos permite construir interfaces ricas, utilizando classes CSS e código JavaScipt -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spotmusic</title>
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, user-scalable=no"/>
+
+    <link href="/webjars/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="/css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Spotmusic</h1>
+    </div>
+
+    <h4>
+        Nova playlist
+    </h4>
+<!--  	 th:action recebe o caminho que ao clicar no botão salvar será enviado uma requisição para este caminho  
+		a definição do metodo http utilizado para realização dessa requisição é feita no atributo th:method 
+		o atributp th:object é feito o bind entre view e o controller  
+		${playlist.id} == 0 ? post : put se o id presente em  playlist for = 0 significa que está criando uma nova playlist o metodo http a ser utiliza é o post caso for diferente de 0  significa que está editando que está editando os dados de uma playlist o metodo a ser utilizadpo é o put
+		-->
+    <form th:action="@{/playlists/salvar}" th:method="${playlist.id} == 0 ? post : put" th:object="${playlist}">
+        <div class="row">
+           <!-- para manter o id da playlist escondido o atributo th:field dentro dele *{id}  fazer isso é semelhante obter o valor do atributo id do objeto PlayList-->
+            <input id="id" type="hidden" th:field="*{id}"/>
+            <div class="form-group col-md-4">
+                <label for="nome">Nome:</label>
+                <input class="form-control" id="nome" type="text" th:field="*{nome}"/>
+   <!--              th:if="${#fields.hasErrors('nome')} verifica se houve algum erro de validação nesse campo, o thymeleaf fornece uma função fields.hasErrors
+                o erro sera exibido com th:errors -->
+                <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                 <div th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+            </div>
+
+            <div class="form-group col-md-8">
+                <label for="descricao">Descrição:</label>
+                <input class="form-control" id="descricao" type="text" th:field="*{descricao}"/>
+                <div th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Salvar</button>
+        </div>
+
+    </form>
+
+    <hr/>
+
+    <a class="btn btn-light" th:href="@{/playlists/listar}">Voltar</a>
+
+    <hr/>
+    <footer class="footer">
+        <p>&copy; 2018 DevMedia</p>
+    </footer>
+
+</div>
+</body>
+</html>
